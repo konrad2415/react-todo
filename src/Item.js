@@ -1,26 +1,26 @@
 import React from 'react';
-import './App.css';
+import './App.css'
 
 class Item extends React.Component {
-  deleteItem() {
-          this.props.onRemove();
+  _remove() {
+    if (this.props.onRemove)
+      this.props.onRemove();
   }
   render() {
-    let {itemData} = this.props; //< --  pa la flojera de no poner los this.props
     return (
       <li>
         <div className="icon">
-          <img src={require(`./${itemData.image}`)} alt="All plataforms supported" />
+          <img src={require(`./${this.props.List.image}`)} alt="hambuerger" />
         </div>
         <div className="name">
-          <span className="item-name">{itemData.name}</span>
-          <span className="item-price">{itemData.portion}</span>
+          <span className="item-name">{this.props.List.name}</span>
+          <span className="item-price">{this.props.List.portion}</span>
         </div>
         <div className="price">
-          <h3>${this.props.itemData.price}</h3>
+          <h3>${this.props.List.price}</h3>
         </div>
-        <button className="remove" onClick={this.deleteItem.bind(this)}>
-          <i>Delete!</i>
+        <button className="remove" onClick={this._remove.bind(this)}>
+          <i className="material-icons">close</i>
         </button>
       </li>
     )
