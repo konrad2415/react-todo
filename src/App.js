@@ -3,21 +3,20 @@ import Item from './Item';
 import Button from './Button'
 import './App.css';
 
-
 class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = {  
       List: [
         {
-          image: "hambuerger.png",
-          name: "Hambueger",
-          portion: "150g",
-          price: 12,
+          image: "working.jpg",
+          name: "General Software Development",
+          portion: "Great UI/ and UE",
+          price: 500,
         },
         ],
-      total:12,
+      total:0, // <<== Inicialisa a cero, depues de add el primer item se actualisa
       _debug:1
     }
     
@@ -55,10 +54,10 @@ class App extends React.Component {
     let allData = List;
     
     allData.push({
-      image: 'http://localhost/cssworking/videocurse/src/images/smartWatch.png' ,
-      name: "Papas a la francesa",
-      portion: "140g",
-      price: 5,
+      image: "mApp.jpg",
+      name: "Movile first philosophy",
+      portion: "Android IOs development",
+      price: 200,
     })
     
     let i= List.length-1; // Indice de posicion de ultima posicion en lista
@@ -87,22 +86,22 @@ class App extends React.Component {
   
 
   render() {
-    let {total,List} = this.state;
-    /*let imgList = ['http://localhost/cssworking/videocurse/src/images/smartWatch.png', 'http://localhost/cssworking/videocurse/src/images/laptop.png', 'http://localhost/cssworking/videocurse/src/images/buyfood.png']
-    let imgURL = imgList[Math.floor(2 * Math.random() + 1)];
-    console.log(imgURL);
-    */
-    let imgURL = 'http://localhost/cssworking/videocurse/src/images/smartWatch.png';
-    //console.log(imgURL);
+    let {List,total} = this.state;
     return (
       <div className="app">
-        <h1>Ejemplo de listas</h1>
+        <h4>
+          Total:${total}
+        </h4>
+          <br/>
+          <br/>
+          <br/>
+
+        <h1>Lista de productos:</h1>
+        
         <ul className="todo-list">
-          {
-            
-            
-            List.map((item, index) =>{
-              return <Item List={item} image={imgURL} key={index} onRemove={() => this.remove(index)} />
+          {List.map(
+            (item, index) =>{
+              return <Item itemData={item} key={index} onRemove={() => this.remove(index)} />
             }
               
           )
@@ -113,11 +112,7 @@ class App extends React.Component {
             onClick={this.add.bind(this)}
             name="Añadir producto"
           />
-          <h4>
-             ${this.state.total}
           
-          
-          </h4>
         </div>
       </div>
     );
